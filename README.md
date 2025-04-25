@@ -24,8 +24,8 @@ A modern, responsive web application for tracking cryptocurrency prices in real-
 
 - **React** (v18.2.0) - UI library
 - **TypeScript** (v5.2.2) - Type-safe JavaScript
-- **Redux Toolkit** (v2.2.1) - State management
-- **Tailwind CSS** (v3.4.1) - Utility-first CSS framework
+- **R**edux Toolkit** (v2.2.1) - State management
+- **Tailwind CSS (v3.4.1) - Utility-first CSS framework
 - **Vite** (v5.1.4) - Build tool and development server
 - **Jest** (v29.7.0) - Testing framework
 - **Chart.js** (v4.4.1) - Interactive charts

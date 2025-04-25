@@ -14,9 +14,9 @@ interface CryptoRowProps {
 
 const CryptoRow: React.FC<CryptoRowProps> = ({ crypto }) => {
   const dispatch = useDispatch();
-  const favoriteIds = useSelector(selectFavoriteIds);
-  const isFavorite = favoriteIds.includes(crypto.id);
-  const prevPriceRef = useRef(crypto.price);
+  const favoriteIds = useSelector(selectFavoriteIds); 
+  const isFavorite = favoriteIds.includes(crypto.id);             
+    const prevPriceRef = useRef(crypto.price);
   const [pulseClass, setPulseClass] = useState<string>('');
   const [imageError, setImageError] = useState(false);
   
