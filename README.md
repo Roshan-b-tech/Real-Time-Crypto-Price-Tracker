@@ -15,18 +15,23 @@ A modern, responsive web application for tracking cryptocurrency prices in real-
 - Multiple sorting options (rank, gainers, losers, volume, market cap)
 - Responsive design with mobile support
 - Dark mode UI
+- Real-time price alerts
+- Historical price data visualization
 
 ## Tech Stack
 
 ### Frontend
 
-- **React** - UI library
-- **TypeScript** - Type-safe JavaScript
-- **Redux Toolkit** - State management
-- **Tailwind CSS** - Utility-first CSS framework
-- **Vite** - Build tool and development server
-- **Jest** - Testing framework
+- **React** (v18.2.0) - UI library
+- **TypeScript** (v5.2.2) - Type-safe JavaScript
+- **Redux Toolkit** (v2.2.1) - State management
+- **Tailwind CSS** (v3.4.1) - Utility-first CSS framework
+- **Vite** (v5.1.4) - Build tool and development server
+- **Jest** (v29.7.0) - Testing framework
+- **Chart.js** (v4.4.1) - Interactive charts
 - **WebSocket** - Real-time data updates
+- **date-fns** (v3.3.1) - Date manipulation
+- **numeral** (v2.0.6) - Number formatting
 
 ### Architecture
 
@@ -48,6 +53,7 @@ src/
 ├── services/           # External services
 │   └── binanceWebSocket.ts # Binance WebSocket integration
 ├── utils/              # Utility functions
+│   └── formatters.ts      # Number and date formatting
 ├── types.ts            # TypeScript type definitions
 └── App.tsx             # Root component
 ```
@@ -61,6 +67,7 @@ The application uses Redux Toolkit for state management with the following featu
 - Search and filter state
 - Sorting options
 - Loading states
+- Price alert management
 
 ## Setup Instructions
 
@@ -68,6 +75,7 @@ The application uses Redux Toolkit for state management with the following featu
 
 - Node.js (v14 or higher)
 - npm or yarn
+- Git
 
 ### Installation
 
@@ -112,24 +120,55 @@ npm test
 yarn test
 ```
 
-## Development
+### Available Scripts
 
-### Code Style
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run test` - Run tests
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:coverage` - Run tests with coverage
+- `npm run format` - Format code with Prettier
+- `npm run lint` - Run ESLint
+- `npm run type-check` - Run TypeScript type checking
 
-The project uses ESLint and Prettier for code formatting. To format your code:
+## API Integration
 
-```bash
-npm run format
-# or
-yarn format
-```
+The application uses the Binance WebSocket API for real-time price updates. The integration is handled in `src/services/binanceWebSocket.ts`. The WebSocket connection:
 
-### Adding New Features
+- Establishes a connection to Binance's WebSocket API
+- Subscribes to real-time price updates
+- Handles reconnection on connection loss
+- Manages multiple currency pairs
+- Implements error handling and logging
 
-1. Create new components in the `src/components` directory
-2. Add new state management in `src/store/cryptoSlice.ts`
-3. Update types in `src/types.ts` if needed
-4. Add tests in the corresponding `.test.ts` files
+## Troubleshooting
+
+### Common Issues
+
+1. **WebSocket Connection Issues**
+
+   - Check your internet connection
+   - Verify that Binance API is accessible
+   - Check browser console for error messages
+
+2. **Build Errors**
+
+   - Clear node_modules and reinstall dependencies
+   - Update Node.js to the latest LTS version
+   - Check for conflicting dependencies
+
+3. **TypeScript Errors**
+   - Run `npm run type-check` to identify issues
+   - Update type definitions if needed
+   - Check for missing type declarations
+
+### Development Tips
+
+- Use the browser's developer tools to monitor WebSocket connections
+- Enable source maps for better debugging
+- Use React Developer Tools for component inspection
+- Monitor Redux state changes with Redux DevTools
 
 ## Contributing
 

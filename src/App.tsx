@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ArrowUp } from 'lucide-react';
 import { startBinanceWebSocket, stopBinanceWebSocket } from './services/binanceWebSocket';
@@ -12,6 +12,7 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state: RootState) => selectIsLoading(state));
   const [showBackToTop, setShowBackToTop] = React.useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   useEffect(() => {
     // Start the Binance WebSocket connection
@@ -24,16 +25,26 @@ const App: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
 
+    // Simulate initial loading time (you can remove this in production)
+    const timer = setTimeout(() => {
+      setIsInitialLoading(false);
+    }, 2000);
+
     // Clean up when component unmounts
     return () => {
       stopBinanceWebSocket();
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
     };
   }, [dispatch]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  if (isInitialLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="min-h-screen bg-slate-900 text-white overflow-x-hidden">
